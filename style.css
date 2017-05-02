@@ -1,197 +1,280 @@
 html,body {
+	--padH: 50px;
+	--padV:  6px;
+	--elemHS: 5px;
+	--elemVS: 6px;
+	--elemBorder: 6px;
+
+	/*--elemH: calc( calc( 100px - 2 * var(--padH) ) / 5 - 2 * var(--elemHS) );
+	--elemW: calc( calc( 100px - 2 * var(--padV) ) / 4 - 2 * var(--elemVS) );*/
+
+	--elemH: 240px;
+	--elemW: 230px;
+	
+	--bgcolor: #000; /*#B8B1B1;*/
+	
     margin:0;
-    padding:0;
-	}
-
-img{
-	
-	
+    padding:2px 0px 6px 25px; /* top right bottom left */
+	background-color: var(--bgcolor);
 }
 
-#nul {
+.corner {
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);
+	margin: var(--elemVS) var(--elemHS);
+	overflow: hidden;		
+}
+
+
+#nul1 {
 	position: absolute;
-	top: 6px;
-	left: 50px;
-	width: 236px;
-	
-	
+	height: calc(1.415 * var(--elemH));
+	width: calc(1.415 * var(--elemW));
+	transform-origin: 0 0;
+	transform: rotate(45deg);
+	border-top: solid var(--elemHS) var(--bgcolor);
 }
+
+#nul2 {
+	position: absolute;
+	height: calc(1.415 * var(--elemH));
+	width: calc(1.415 * var(--elemW));
+	transform-origin: 0 0;
+    transform: rotate(-45deg);
+	border-left: solid var(--elemHS) var(--bgcolor);
+}
+
 #een {
-	position: absolute;
-	top: 6px;
-	left: 287px;
-	width: 236px;
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);	
 }
 
 #twee {
-position: absolute;
-	top:6px;
-	left: 523px;
-	width: 236px;
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);	
 }
 
 #drie {
-position: absolute;
-	top:6px;
-	left: 760px;
-	width: 236px;
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);
 }
 
+
 #vier {
-position: absolute;
-	top:6px;
-	left: 997px;
-	width: 226px;
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+}
+
+#vier1 {
+	position: absolute;
+	height: calc(1.415 * var(--elemH));
+	width: calc(1.415 * var(--elemW));
+	transform-origin: 0 0;
+    transform: rotate(45deg);
+	border-top: solid var(--elemHS) var(--bgcolor);
+}
+
+#vier2 {
+	position: absolute;
+	height: calc(1.415 * var(--elemH));
+	width: calc(1.415 * var(--elemW));
+	transform-origin: 0 0;
+    transform: rotate(-45deg);
+	border-left: solid var(--elemHS) var(--bgcolor);
 }
 
 #vijf {	
-	position: absolute;
-	top:255px;
-	left: 45px;
-	width: 236px;
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);	
 }
 
 #zes {
-	position: absolute;
-	top:255px;
-	left: 287px;
-	width: 236px;
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);	
 }
 
 #zeven {
-position: absolute;
-	top:255px;
-	left: 523px;;
-	width: 236px;
-	
-		
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);			
 }
+
 #acht {
-	position: absolute;
-	top:255px;
-	left: 760px;;
-	width: 236px;
-	
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);	
 }
+
 #negen {
-	position: absolute;
-	top:255px;
-	left: 997px;
-	width: 236px;
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);	
 }
+
 #tien {
-	position: absolute;
-	top:507px;
-	left: 50px;
-	width: 236px;
-	
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);	
 }
+
 #elf {
-position: absolute;
-	top:507px;
-	left: 287px;
-	width: 236px;
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);	
 }
 
 #twaalf {
-	position: absolute;
-	top:507px;
-	left: 523px;
-	width: 236px;
-	
-		
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);			
 }
+
 #dertien {
-position: absolute;
-	top:507px;
-	left: 760px;
-	width: 236px;
-	
-	
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);
 }
+
 #veertien {
-position: absolute;
-	top:507px;
-	left: 997px;
-	width: 236px;
-
-	
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS) var(--elemVS) calc(var(--elemHS) - 10px); /* top right bottom left */
 }
-#vijftien {
+
+#vijftien1 {
 	position: absolute;
-	top:757px;
-	left: 50px;
-	width: 236px;
-	
-	
+	height: calc(1.415 * var(--elemH));
+	width: calc(1.415 * var(--elemW));
+	transform-origin:100% 0;
+    transform: translate(calc(-0.415 * var(--elemW) - var(--elemHS))) rotate(45deg);
+	border-right: solid var(--elemHS) var(--bgcolor);
 }
+
+#vijftien2 {
+	position: absolute;
+	height: calc(1.415 * var(--elemH));
+	width: calc(1.415 * var(--elemW));
+	transform-origin:100% 0;
+    transform: translate( calc(-0.415 * var(--elemW))) rotate(-45deg);
+	border-top: solid var(--elemVS) var(--bgcolor);
+}
+
 #zestien {
-position: absolute;
-	top:757px;
-	left: 287px;
-	width: 236px;
-
-	
-	
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);
 }
+
 #zeventien {
-position: absolute;
-	top:757px;
-	left: 523px;
-	width: 236px;
-
-	
-	
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS) var(--elemVS) calc(var(--elemHS)-10px);	
 }
+
 #achtien {
-position: absolute;
-	top:757px;
-	left: 760px;
-	width: 236px;
-	
+	position: relative;
+	float: left;
+	height: var(--elemH);
+	width: var(--elemW);
+	margin: var(--elemVS) var(--elemHS);	
 }
-#negentien {
-position: absolute;
-	top:757px;
-	left: 997px;
-	width: 236px;
 
-	
+#negentien1 {
+	position: absolute;
+	height: calc(1.415 * var(--elemH));
+	width: calc(1.415 * var(--elemW));
+	transform-origin:100% 0;
+    transform: translate(calc(-0.415 * var(--elemW) - var(--elemHS))) rotate(45deg);
+	border-right: solid var(--elemHS) var(--bgcolor);
 }
+
+#negentien2 {
+	position: absolute;
+	height: calc(1.415 * var(--elemH));
+	width: calc(1.415 * var(--elemW));
+	transform-origin:100% 0;
+    transform: translate(calc(-0.415 * var(--elemW))) rotate(-45deg);
+	border-top: solid var(--elemHS) var(--bgcolor);
+}
+
 #twintig {
-position: absolute;
-	top:259px;
-	left: 400px;
-	width: 500px;
-	height :500px;
-	
-}
-#twintig img{
-position: absolute;
-z-index:10;
-}
-
-#plaatjeO{
-position: absolute;
-z-index:10;
+	margin: auto;
+	position: absolute;
+	width: 380px;
+	height: 380px;
+	border: solid var(--elemBorder) var(--bgcolor);
+	-moz-border-radius: calc(190px + var(--elemBorder) / 2);
+	-webkit-border-radius: calc(190px + var(--elemBorder) / 2);
+	border-radius: calc(250px + var(--elemBorder) / 2);
+	top: 0; left: 0; bottom: 0; right: 0;
+	overflow: hidden;
+	z-index:10;
 }
 
-#plaatjeN{
-position: absolute;
-z-index:1;
+#twintig img {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index:10;
+}
+
+.plaatjeO {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index:10;
+}
+
+.plaatjeN {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index:1;
 }
 

@@ -1,0 +1,229 @@
+<html>
+<head>
+<script src="jquery-1.12.0.min.js"></script>
+<script language="javascript">
+
+
+$( document ).ready(function() {
+	
+	//Variabele opzetten
+	var imagesAll, imagesUnused, addedImage, index;
+	var image, imageCounter, dCounter, lastImage;
+	dCounter = 0;
+	
+	//Scan directory 'img_sq' for images (square)
+	$.getJSON("./directoryScan.php?dir=img/sq", function(json){
+   		imagesAll = shuffle(json);
+		imagesUnused = JSON.parse(JSON.stringify(imagesAll));		
+	});	
+	
+	// Get all divs with class content
+	var content = document.getElementsByClassName("content");
+	
+	//Functie om een willekeurig getal tussen min en max te krijgen
+	function getRandomInt(min, max) {
+	    return Math.floor(Math.random() * (max - min + 1)) + min;
+	};
+	
+	//Functie om array willekeurig te sorteren
+	function shuffle(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex;
+
+	// While there remain elements to shuffle...
+  	while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+	
+	//Divs in een array
+	divid = new Array()
+	divid[0] = 'nul1'
+	divid[1] = 'een'
+	divid[2] = 'twee'
+	divid[3] = 'drie'
+	divid[4] = 'vier1'
+	divid[5] = 'vijf'
+	divid[6] = 'zes'
+	divid[7] = 'zeven'
+	divid[8] = 'acht'
+	divid[9] = 'negen'
+	divid[10] = 'tien'
+	divid[11] = 'elf'
+	divid[12] = 'twaalf'
+	divid[13] = 'dertien'
+	divid[14] = 'veertien'
+	divid[15] = 'vijftien1'
+	divid[16] = 'zestien'
+	divid[17] = 'zeventien'
+	divid[18] = 'achtien'
+	divid[19] = 'negentien1'
+	divid[20] = 'nul2'
+	divid[21] = 'vier2'
+	divid[22] = 'vijftien2'
+	divid[23] = 'negentien2'
+	
+	//eerste keer plaatjes in ID "plaatjeN" zetten. 	
+	function vullen() {				
+		image = document.querySelector("#"+divid[dCounter]+" #plaatjeN");
+		image.src = imagesAll[dCounter];
+
+		//Plaatje uit imagesunUsed halen
+		addedImage = imagesAll[dCounter];
+		imagesUnused.splice(addedImage,1);
+		dCounter ++;		
+		
+		//Laatste div gevuld: dan de willkeurige changeimage functie uitvoeren
+		if (dCounter > (divid.length-1)) {		
+			
+			setInterval(changeImage,12000);
+		};
+	};
+	
+	//Functie crossfade images	
+	function crossfade() {			
+			$(lastImage).show();
+			$(lastImage).fadeOut(5000, "linear");
+			$(image).fadeIn(5000, "linear");			
+    };
+		
+	//Functie plaatje veranderen naar een uit de array imagesUnused
+	function changeImage() {
+		
+		//Pak een willekeurig nummer tussen 0 en het aantal elementen uit een array (minus 1, altijd beginnen bij 0 ipv 1)			
+		randomImg = getRandomInt(0, (imagesUnused.length -1));
+		randomDiv = getRandomInt(0, (divid.length-1));
+		
+		//Kies een random div waar een random plaatje ingezet wordt (plaatjeN) en zet het bestaande plaatje in "plaatjeO) 
+			image = document.querySelector("#"+divid[randomDiv]+" #plaatjeN"); 
+			lastImage = document.querySelector("#"+divid[randomDiv]+" #plaatjeO");			
+			//lastImage.src = 'img/'+ image.src.replace('http://127.0.0.1/img/', '');
+			lastImage.src = image.src;
+			//verberg het nieuwe plaatje, anders kun je niet infaden.
+			$(image).hide();
+		//Nieuw plaatje plakken			
+		image.src = imagesUnused[randomImg] ;
+		//roep Crossfade functie aan
+			crossfade();
+
+		//plaatje wat vervangen is weer toevoegen aan imagesUnused		
+		lastImage = lastImage.src;			
+		
+			if (lastImage.indexOf("127.0.0.1")  >= 0) {
+				lastImage= lastImage.replace('http://127.0.0.1/img/', '');
+			}; 
+		imagesUnused.push(lastImage);
+		
+		addedImage = image.src;	
+			if (addedImage.indexOf("127.0.0.1")  >= 0) {
+				addedImage = addedImage.replace('http://127.0.0.1/img/', '');
+			};
+		index = imagesUnused.indexOf(addedImage);
+		imagesUnused.splice(index,1);
+			
+	};
+	
+	//Voer deze functie uit tot de plaatjes op zijn (x<22)
+	
+	for(x=1; x<25; x++) window.setTimeout(vullen, 10 * x);
+});
+
+</script>
+<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div id = "corner">
+		<div id = "nul1" class = "content triangle TL">
+				<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+		</div>
+		<div id = "nul2"  class = "content triangle BR">
+				<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+		</div>
+</div>
+<div id = "een" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "twee" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "drie" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "corner">
+		<div id = "vier1"  class = "content triangle BL">
+				<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+		</div>
+		<div id = "vier2"  class = "content triangle TR">
+				<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+		</div>
+</div>
+<div id = "vijf" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "zes" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "zeven" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "acht" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "negen" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "tien" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "elf" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "twaalf" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "dertien" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "veertien" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "corner">
+		<div id = "vijftien1"  class = "content triangle BL">
+				<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+		</div>
+		<div id = "vijftien2"  class = "content triangle TR">
+				<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+		</div>
+</div>
+<div id = "zestien" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "zeventien" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "achtien" class = "content square">
+		<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+</div>
+<div id = "corner" class = "content square">
+		<div id = "negentien1" class = "content triangle TL">
+				<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+		</div>
+		<div id = "negentien2" class = "content triangle BR">
+				<img  src ="empty.gif" id="plaatjeO"> <img  src ="empty.gif" id="plaatjeN">
+		</div>
+</div>
+<div id = "twintig"  class = "content circle">
+		<img src="./img_cl/gifgroot2.gif" >
+</div>
+</body>
+</html>
