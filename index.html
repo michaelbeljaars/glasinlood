@@ -1,0 +1,206 @@
+<html>
+<head>
+
+
+<script src="jquery-1.12.0.min.js"></script>
+<script language="javascript">
+
+
+$( document ).ready(function() {
+	
+	//Variabele opzetten
+	var imagesAll, imagesUnused, addedImage, index;
+	var image, imageCounter, dCounter, lastImage;
+	dCounter = 0;
+	
+	//PHP bestand aanroepen die een JSON bestand terug geeft en deze in bovenstaande variabele proppen
+	$.getJSON("http://127.0.0.1:80/directoryScan.php", function(json){
+   		imagesAll = json;
+		imagesUnused = JSON.parse(JSON.stringify(imagesAll));		
+	});		
+	
+	//Functie om een willekeurig getal tussen min en max te krijgen
+	function getRandomInt(min, max) {
+	    return Math.floor(Math.random() * (max - min + 1)) + min;
+	};
+	
+	//Divs in een array
+	divid = new Array()
+	divid[0] = 'nul'
+	divid[1] = 'een'
+	divid[2] = 'twee'
+	divid[3] = 'drie'
+	divid[4] = 'vier'
+	divid[5] = 'vijf'
+	divid[6] = 'zes'
+	divid[7] = 'zeven'
+	divid[8] = 'acht'
+	divid[9] = 'negen'
+	divid[10] = 'tien'
+	divid[11] = 'elf'
+	divid[12] = 'twaalf'
+	divid[13] = 'dertien'
+	divid[14] = 'veertien'
+	divid[15] = 'vijftien'
+	divid[16] = 'zestien'
+	divid[17] = 'zeventien'
+	divid[18] = 'achtien'
+	divid[19] = 'negentien'
+	
+	//eerste keer plaatjes in ID "plaatjeN" zetten. 	
+	function vullen() {		
+		image = document.querySelector("#"+divid[dCounter]+" #plaatjeN");
+		image.src = 'img/'+imagesAll[dCounter];
+
+		//Plaatje uit imagesunUsed halen
+		addedImage = imagesAll[dCounter];
+		imagesUnused.splice(addedImage,1);
+		dCounter ++;		
+		
+		//Laatste div gevuld: dan de willkeurige changeimage functie uitvoeren
+		if (dCounter > (divid.length-1)) {		
+			
+			setInterval(changeImage,12000);
+		};
+	};
+	
+	//Functie crossfade images	
+	function crossfade() {			
+			$(lastImage).show();
+			$(lastImage).fadeOut(5000, "linear");
+			$(image).fadeIn(5000, "linear");			
+    };
+		
+	//Functie plaatje veranderen naar een uit de array imagesUnused
+	function changeImage() {
+		
+		//Pak een willekeurig nummer tussen 0 en het aantal elementen uit een array (minus 1, altijd beginnen bij 0 ipv 1)			
+		randomImg = getRandomInt(0, (imagesUnused.length -1));
+		randomDiv = getRandomInt(0, (divid.length-1));
+		
+		//Kies een random div waar een random plaatje ingezet wordt (plaatjeN) en zet het bestaande plaatje in "plaatjeO) 
+			image = document.querySelector("#"+divid[randomDiv]+" #plaatjeN"); 
+			lastImage = document.querySelector("#"+divid[randomDiv]+" #plaatjeO");			
+			lastImage.src = 'img/'+ image.src.replace('http://127.0.0.1/img/', '');
+			//verberg het nieuwe plaatje, anders kun je niet infaden.
+			$(image).hide();
+		//Nieuw plaatje plakken			
+		image.src = 'img/'+imagesUnused[randomImg] ;
+		//roep Crossfade functie aan
+			crossfade();
+
+		//plaatje wat vervangen is weer toevoegen aan imagesUnused		
+		lastImage = lastImage.src;			
+		
+			if (lastImage.indexOf("127.0.0.1")  >= 0) {
+				lastImage= lastImage.replace('http://127.0.0.1/img/', '');
+			}; 
+		imagesUnused.push(lastImage);
+		
+		addedImage = image.src;	
+			if (addedImage.indexOf("127.0.0.1")  >= 0) {
+				addedImage = addedImage.replace('http://127.0.0.1/img/', '');
+			};
+		index = imagesUnused.indexOf(addedImage);
+		imagesUnused.splice(index,1);
+			
+	};
+	
+	//Voer deze functie uit tot de plaatjes op zijn (x<22)
+	for(x=1; x<21; x++) window.setTimeout(vullen, 10 * x);
+});
+
+</script>
+<link href="style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+	
+	<div id = "nul">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "een">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN">  
+	</div>
+	<div id = "twee">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "drie">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "vier">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "vijf">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "zes">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	
+	<div id = "zeven">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "acht">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "negen">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "tien">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "elf">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "twaalf">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "dertien">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "veertien">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "vijftien">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "zestien">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "zeventien">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "achtien">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "negentien">
+		<img  src ="" id="plaatjeO"> 
+		<img  src ="" id="plaatjeN"> 
+	</div>
+	<div id = "twintig">
+		<img src="gifgroot.gif" > 
+	</div>
+	
+</body>
+</html>
