@@ -1,15 +1,13 @@
 <html>
 
 <head>
-	<script src="jquery-3.2.1.min.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
     <script language="javascript">
     //Variabele opzetten
     var content;
     var images_sq, images_sq_av;
     var images_tr, images_tr_av;
     var images_cl, images_cl_av;
-    var imagesUnused, addedImage, index;
-    var image, imageCounter, dCounter, lastImage;
 
     function prep() {
         //Scan directory 'img_sq' for images (square)
@@ -60,12 +58,12 @@
         return array;
     }
 
-    //eerste keer plaatjes in ID "plaatjeN" zetten. 	
+    //eerste keer plaatjes in ID "image2" zetten. 	
     function loadimages() {
 
         for (i = 0; i < content.length; i++) {
             if (content.item(i).classList.contains("square")) {
-                image = content.item(i).getElementsByClassName("plaatjeN");
+                image = content.item(i).getElementsByClassName("image1");
                 j = i % images_sq_av.length;
                 image[0].src = images_sq_av[j];
 
@@ -73,7 +71,7 @@
                 images_sq_av.splice(j, 1);
 
             } else if (content.item(i).classList.contains("triangle")) {
-                image = content.item(i).getElementsByClassName("plaatjeN");
+                image = content.item(i).getElementsByClassName("image1");
                 j = i % images_tr_av.length;
                 image[0].src = images_tr_av[j];
 
@@ -81,7 +79,7 @@
                 images_tr_av.splice(j, 1);
 
             } else if (content.item(i).classList.contains("circle")) {
-                image = content.item(i).getElementsByClassName("plaatjeN");
+                image = content.item(i).getElementsByClassName("image1");
                 j = i % images_cl_av.length;
                 image[0].src = images_cl_av[j];
 
@@ -93,15 +91,27 @@
 
     //Functie plaatje veranderen naar een uit de array imagesUnused
     function changeImage() {
-        //i = getRandomInt(0, (content.length - 1));	
-        i = 2;
+        i = getRandomInt(0, (content.length - 1));	
 
-        imageN = content.item(i).getElementsByClassName("plaatjeN")[0];
-        imageO = content.item(i).getElementsByClassName("plaatjeO")[0];
-        imageO.src = imageN.src;
+        image1 = content.item(i).getElementsByClassName("image1")[0];
+        image2 = content.item(i).getElementsByClassName("image2")[0];
 
-		$(imageO).show();
-		$(imageN).show();
+        if (image1.style.zIndex < image2.style.zIndex) { //image1 under image2
+            imageO = image1; //imageO below
+            imageN = image2; //imageN above
+        }
+        else if (image1.style.zIndex > image2.style.zIndex) { //image1 above image2
+            imageO = image2; //imageO below
+            imageN = image1; //imageN above
+        }
+        else { //workaround: why is z-index not taken from css class?
+        	image1.style.zIndex = 1;
+        	image1.style.zIndex = 10;
+        	imageO = image1; //imageO below
+            imageN = image2; //imageN above
+        }
+
+        $(imageN).hide(); //hide imageN for fading in
 
         if (content.item(i).classList.contains("square")) {
             j = getRandomInt(0, (images_sq_av.length - 1));
@@ -120,18 +130,20 @@
 
         }
 
- 		//$(imageN).fadeIn(4000,'linear');
- 		$(imageO).fadeOut(2000, "linear");
+        $(imageO).fadeOut(5000,'linear');
+        $(imageN).fadeIn(5000, "linear");
+        //imageO.src = "empty.gif";
 
- 		imageO.src = "empty.gif";
-
+        imageO.style.zIndex = 10;
+        imageN.style.zIndex = 1;      
+        
     };
 
     $(document).ready(function() {
 
         prep();
         setTimeout(loadimages, 1000);
-        setInterval(changeImage, 8000);
+        setInterval(changeImage, 10000);
 
     });
     </script>
@@ -141,83 +153,83 @@
 <body>
     <div class="corner">
         <div id="nul1" class="content triangle TL">
-            <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+            <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
         </div>
         <div id="nul2" class="content triangle BR">
-            <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+            <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
         </div>
     </div>
     <div id="een" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="twee" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="drie" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div class="corner">
         <div id="vier" class="content square">
-            <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+            <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
         </div>
     </div>
     <div id="vijf" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="zes" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="zeven" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="acht" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="negen" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="tien" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="elf" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="twaalf" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="dertien" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="veertien" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div class="corner">
         <div id="vijftien1" class="content triangle BL">
-            <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+            <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
         </div>
         <div id="vijftien2" class="content triangle TR">
-            <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+            <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
         </div>
     </div>
     <div id="zestien" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="zeventien" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div id="achtien" class="content square">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
     <div class="corner">
         <div id="negentien1" class="content triangle TL">
-            <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+            <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
         </div>
         <div id="negentien2" class="content triangle BR">
-            <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+            <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
         </div>
     </div>
     <div id="twintig" class="content circle">
-        <img src="empty.gif" class="plaatjeO"> <img src="empty.gif" class="plaatjeN">
+        <img src="empty.gif" class="image1"> <img src="empty.gif" class="image2">
     </div>
 </body>
 
